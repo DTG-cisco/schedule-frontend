@@ -1,5 +1,9 @@
+upstream backend {
+    server schedule-backend:8080;
+}
 server {
     listen 80;
+    listen  [::]:80;
     server_name localhost;
 
     location / {
@@ -8,7 +12,7 @@ server {
     }
 
     location /api {
-        proxy_pass http://schedule-backend:8080;
+        proxy_pass http://backend/;
     }
 
 }
