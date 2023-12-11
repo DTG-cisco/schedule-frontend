@@ -11,6 +11,7 @@ RUN npm run build
 
 # Stage 2: copy build to Nginx
 FROM nginx:alpine
+COPY nginx.docker.conf /etc/nginx/conf.d/default.conf
 COPY --from=build ${APP_DIR}/build/ /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
